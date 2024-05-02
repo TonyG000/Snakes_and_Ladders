@@ -105,13 +105,13 @@ void move_player(player *players, int turn, int roll, int& wins, Graph& g, int n
 	changeColour(WHITE);
 	if (players[turn].score + roll > 100) {
 		changeColour(RED);
-		cout << players[turn].name << "'s score has exceeded 100. Their turn will be skipped." << endl;
+		cout << players[turn].name << "'s score has exceeded 100." << endl << "Their turn will be skipped." << endl;
 	}
 	else {
 		changeColour(LightBlue);
 		players[turn].score += roll;
 		for (int i = 0; i < num; i++) {
-			cout << "\t\t\t" << players[i].name << "'s score is: " << players[i].score << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t" << players[i].name << "'s score is: " << players[i].score << endl;
 		}
 		int prev = players[turn].score; // Store the previous score
 		players[turn].score = g.getDest(players[turn].score);
@@ -120,6 +120,7 @@ void move_player(player *players, int turn, int roll, int& wins, Graph& g, int n
 		if (prev != players[turn].score) {
 			changeColour(LightPurple);
 			string s = (prev < players[turn].score) ? "ladder" : "snake";
+
 			cout << endl << players[turn].name << " landed on a " << s << "! \nTheir score is now " << players[turn].score << ".\n\n";
 		}
 	}
