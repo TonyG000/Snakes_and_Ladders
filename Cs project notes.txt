@@ -1,0 +1,39 @@
+Quick explanations on how the functions work and how they've been altered: 
+
+1- Struct Player- contains string name. score, win.
+
+Note: Vector<pair<int,int>> adj[100]: Each element is a vector of pairs. Where each pair has two integers, the first integer represents the adjacent node (node that shares an edge with another node) and the second is the weight of the edge connecting the node to the adjacent node. [100] specifies that adj has 100 elements. Therefore, up to 100 nodes in the graph can be created (The grid).
+
+2- class Graph (weighted)
+constructor- has the ladder and the snakes.
+ladder- start Dest, then end Dest and weight which is 1 in all.
+
+3- addEdge function: U and V are two nodes connected by the edge, wt is the weight of the edge. 
+Adjacency list between [pair(v, wt) and node u and pair(u, wt) to node v (nodes that it shares an edge with)
+
+4. getDest(int src) will receive a source node, then it will check if the first element of the pair is equal to the source node. If it is it will return the second element (snake and ladder function). if not it will return itself.  I’m using an explicit iterator to loop over the adjacency list for the node src. The iterator points to each pair<int, int> (which I’ve called edge) in the vector adj[src].
+
+5. Kept the same: die_roll, to stimulate the roll of a die from 1 to 5
+
+6. Kept the same: create_player, takes an array of players and the number of players as input and asks the user to enter the names of the player 
+
+7.Slightly changed: move_player, implements the game logic. It will take the array of the players, the current turn, the result of a die roll, and a number of wins by reference. 
+-The score is updated based on the number of die rolls, then checks for any snakes or ladder in that position. This will use the player's turn score in the getDest function to check if the node has an adjacent node, if it does then it will be updated to the new node, if not then it will be kept the same. If the player reaches then they've won.
+-asks players for names, and asks them if they want to play or simulate. 
+-Then enter a while loop until all players have won, each player will take a turn to play, and if there is a win the game will continue without the player.
+
+8. Display_Board: -2D array with all contain |__| to look like a grid (Can be anything), for loop to check the score of the players, if it is greater than 0 then it will calculate the row and column of the board where the player's name should be displayed based on the score
+8.1- in row = 9 - (score - 1) / 10; divide by 10 to get one row (since they are a total of 10 rows), (score -1) is to adjust the row from 0 to 9, same as index, 9-(score -1) to flip the bard such that it is from 1 to 100 not 100 to 1.
+
+8.2-int col = (score - 1) % 10; To find column, score - 1 is to adjust from 0-9, 
+
+8.3- if (row % 2 == 0) {
+	col = 9 - col;
+		}
+The column will be reversed whenever we are at an even row since the game board goes from left to right in even number rows and right to left for odd numbered rows.
+
+8.4. board[row][col] = "|" + players[i].name + "|"; 
+Update the cell by adding the name of the player
+
+9. Main:
+Kept the same, move_player uses the graph now to check for snakes and ladders, and the display_board function is called using the number of players and their struct.
