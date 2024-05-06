@@ -15,9 +15,9 @@ int main() {
 	Graph g;
 	PlayerAndBoard Design;
 	do {
-		for (int i = 0; i < 5; i++) {
+		/*for (int i = 0; i < 5; i++) {
 			bool music = PlaySound(L"game-music-teste-204327.wav", NULL, SND_ASYNC);
-		}
+		}*/ //Music has been commented out since it could cause an error unless "winmm.lib" is manually added as an input in the linker
 		effects.showBlinkingLights();
 		int num = 0;
 		effects.changeColour(effects.AQUA);
